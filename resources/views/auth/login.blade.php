@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <section class="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+    <section class="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" id="loginbackground">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-20 h-20 mr-4" src="{{asset('images/da-logo.png')}}" alt="logo">
