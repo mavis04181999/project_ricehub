@@ -2,6 +2,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+#loginbackground {
+    background-image: url('../../public/images/loginbackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #something {
     background-image: url('../../public/images/masagana ani.png');
     background-repeat: no-repeat;

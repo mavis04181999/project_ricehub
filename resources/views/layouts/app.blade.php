@@ -36,7 +36,7 @@
 
 	<section id="footer">
 		<footer class="text-center bg-gray-50 mt-8 py-4 text-sm">
-			<span>&copy;</span> 2022 Department of Agriculture Regional Office 5, All rights reserved
+			<small>&copy; 2022 Department of Agriculture Regional Field Office 5, All rights reserved</small>
 		</footer>
 	</section>
 	

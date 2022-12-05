@@ -1779,6 +1779,11 @@ select {
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+#loginbackground {
+    background-image: url(/images/loginbackground.jpg?60f9f414bc2e0db00950a58cd7ad56ab);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 #something {
     background-image: url("/images/masagana ani.png?743a2809a9c1e7681f81573de1a93e24");
     background-repeat: no-repeat;
