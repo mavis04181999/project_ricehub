@@ -100,7 +100,7 @@ class UserController extends Controller
                 'suffixName' => isset($request->validated()['input_user_suffix']) ? $request->validated()['input_user_suffix'] : null,
                 'dateOfBirth' => isset($request->validated()['input_user_dateofbirth']) ? $request->validated()['input_user_dateofbirth'] : null,
 
-                'role' => isset($request->validated()['input_user_role']) ? $request->validated()['input_user_role'] : null,
+                'role' => isset($request->validated()['input_user_role']) ? strtolower($request->validated()['input_user_role']) : null,
                 'sex' => isset($request->validated()['input_user_sex']) ? $request->validated()['input_user_sex'] : null,
                 'age' => $request->validated()['input_user_age'],
 
