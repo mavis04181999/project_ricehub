@@ -1,12 +1,6 @@
 <x-app-layout>
 	<div class="flex min-h-screen bg-gray-100">
 		<div class="mt-4 mb-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-			<div class="hidden sm:block" aria-hidden="true">
-				<div class="py-5">
-					<div class="border-t border-gray-200"></div>
-				</div>
-			</div>
 			
 			@include('components.messages')
 

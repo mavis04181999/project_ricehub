@@ -7,6 +7,12 @@
             
             <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
+            <div class="px-2 sm:px-0">
+                <h3 class="text-sm font-bold leading-6 text-gray-900">Farmer Dashboard</h3>
+            </div>
+
+            <hr class="my-8">
+
             <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="p-5 bg-white rounded shadow-sm">
                     <div class="text-base text-gray-400 ">Total Farmers</div>
@@ -47,7 +53,7 @@
 
             {{-- <div class="my-8"></div> --}}
 
-            <hr class="my-8">
+            <br class="my-8">
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 

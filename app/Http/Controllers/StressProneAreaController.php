@@ -44,6 +44,20 @@ class StressProneAreaController extends Controller
      */
     public function store(StressProneAreaRequest $request)
     {
+        
+        if (isset($request->validated()['input_spa_city'])) 
+        {
+            $stressProneArea = StressProneArea::where('city_id', $request->validated()['input_spa_city'])->where('barangay_id', $request->validated()['input_spa_barangay'])->where('deleted_at', null)->first();
+        } else 
+        {
+            $stressProneArea = StressProneArea::where('municipality_id', $request->validated()['input_spa_municipality'])->where('barangay_id', $request->validated()['input_spa_barangay'])->get();
+        }
+
+        if (!empty($stressProneArea)) 
+        {
+            return redirect()->route('enumerator.form2')->with('info', 'Stress Data Already Exists <a class="ml-2 btn btn-blue inline-block px-6 py-2.5 bg-blue-600 text-black font-medium text-xs leading-normal uppercase rounded shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" href="'.route('stresspronearea.province',  ['province' => $stressProneArea->province_id]).'">View Record</a>');
+        }
+        
         try 
         {
             DB::beginTransaction();
@@ -184,12 +198,15 @@ class StressProneAreaController extends Controller
 
     public function province(Province $province)
     {
-        $citiesSPADetails = StressProneArea::leftjoin('cities', 'stresspronearea.city_id', '=', 'cities.id')
+        $citiesSPADetails = StressProneArea::leftjoin('provinces', 'stresspronearea.province_id', '=', 'provinces.id')
+                                    ->leftjoin('cities', 'stresspronearea.city_id', '=', 'cities.id')
                                     ->leftjoin('barangay', 'stresspronearea.barangay_id', '=', 'barangay.id')
                                     ->where('stresspronearea.province_id', $province->id)
                                     ->where('stresspronearea.municipality_id', null)
                                     ->select(
                                         'stresspronearea.*',
+                                        'provinces.province as province',
+                                        'provinces.code as provincecode',
                                         'cities.city as city',
                                         'cities.code as citycode',
                                         'barangay.barangay as barangay',
@@ -197,12 +214,15 @@ class StressProneAreaController extends Controller
                                     )
                                     ->get();
         
-        $municipalitiesSPADetails = StressProneArea::leftjoin('municipalities', 'stresspronearea.municipality_id', '=', 'municipalities.id')
+        $municipalitiesSPADetails = StressProneArea::leftjoin('provinces', 'stresspronearea.province_id', '=', 'provinces.id')
+                                    ->leftjoin('municipalities', 'stresspronearea.municipality_id', '=', 'municipalities.id')
                                     ->leftjoin('barangay', 'stresspronearea.barangay_id', '=', 'barangay.id')
                                     ->where('stresspronearea.province_id', $province->id)
                                     ->where('stresspronearea.city_id', null)
                                     ->select(
                                         'stresspronearea.*',
+                                        'provinces.province as province',
+                                        'provinces.code as provincecode',
                                         'municipalities.municipality as municipality',
                                         'municipalities.code as municipalitycode',
                                         'barangay.barangay as barangay',

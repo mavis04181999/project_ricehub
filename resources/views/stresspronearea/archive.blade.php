@@ -7,9 +7,8 @@
             
             <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-            <div class="px-4 sm:px-0">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Farmer Archive</h3>
-                <p class="mt-1 text-sm text-gray-600">Allows you to restore farmer data or information when data is accidentally deleted.</p>
+            <div class="px-2 sm:px-0">
+                <h3 class="text-sm font-bold leading-6 text-gray-900">Stress Prone Area (SPA) Archives</h3>
             </div>
 
             <hr class="my-8">

@@ -25,6 +25,8 @@
                                 <th colspan="1"></th>
                             </tr>
                             <tr>
+                                <th class="text-sm">Province</th>
+                                <th class="text-sm">Province Code</th>
                                 <th class="text-sm">City</th>
                                 <th class="text-sm">City Code</th>
                                 <th class="text-sm">Barangay</th>
@@ -42,6 +44,8 @@
                                 @if ($citiesSPADetails->count() > 0)
                                     @foreach ($citiesSPADetails as $data)
                                     <tr>
+                                        <td class="text-xs">{{ $data->province }}</td>
+                                        <td class="text-xs">{{ $data->provincecode }}</td>
                                         <td class="text-xs">{{ $data->city }}</td>
                                         <td class="text-xs">{{ $data->citycode }}</td>
                                         <td class="text-xs">{{ $data->barangay }}</td>
@@ -99,7 +103,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <table class="table table-striped w-full" style="width: 100%" id="dashboard">
+                    <table class="table table-striped w-full" style="width: 100%" id="dashboard-2">
                         <thead>
                             <tr>
                                 <th colspan="6"></th>
@@ -107,6 +111,8 @@
                                 <th colspan="1"></th>
                             </tr>
                             <tr>
+                                <th class="text-sm">Province</th>
+                                <th class="text-sm">Province Code</th>
                                 <th class="text-sm">Municipality</th>
                                 <th class="text-sm">Municipality Code</th>
                                 <th class="text-sm">Barangay</th>
@@ -124,6 +130,8 @@
                                 @if ($municipalitiesSPADetails->count() > 0)
                                     @foreach ($municipalitiesSPADetails as $data)
                                     <tr>
+                                        <td class="text-xs">{{ $data->province }}</td>
+                                        <td class="text-xs">{{ $data->provincecode }}</td>
                                         <td class="text-xs">{{ $data->municipality }}</td>
                                         <td class="text-xs">{{ $data->municipalitycode }}</td>
                                         <td class="text-xs">{{ $data->barangay }}</td>
@@ -182,6 +190,12 @@
 
         $(document).ready( function () {
             $('#dashboard').DataTable({
+                scrollX: true,
+            });
+        } );
+
+        $(document).ready( function () {
+            $('#dashboard-2').DataTable({
                 scrollX: true,
             });
         } );
