@@ -53,107 +53,30 @@
 									<div class="grid grid-cols-6 gap-6 mt-4">
 										
 										<div class="col-span-6 sm:col-span-4">
-											<label class="block text-sm font-medium text-gray-700">
-											Province
-											</label>
-											<div class="relative mt-2">
-												<select id="input_spa_province" name="input_spa_province" onchange="selectPage1Province(event)" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required >
-													<option id="option_page1_province_default" value="default" {{ old('input_spa_province') == 'default' ? 'selected' : ''}}>-- Select Province --</option>
-													<optgroup label="Region V">
-														@if (isset($provinces) && !empty($provinces))
-															@foreach ($provinces as $province)
-																<option value="{{ $province->id }}" {{ old('input_spa_province', $stressProneArea->province_id) == $province->id ? 'selected' : ''}}>{{ utf8_decode($province->province) }}</option>
-															@endforeach
-														@endif
-													</optgroup>
-												</select>
+											<div class="relative z-0 w-full mb-6 group">
+												<input name="input_spa_province" id="input_spa_province" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="{{ $stressProneArea->province ?? " - " }}" disabled/>
+												<label for="label_spa_province" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Province</label>
 											</div>
 										</div>
-										
-										<div class="col-span-6 sm:col-span-4">
-											<label class="block text-sm font-medium text-gray-700">
-												City
-											</label>
-											<div class="relative mt-2">
-												<select id="input_spa_city" name="input_spa_city" onchange="selectPage1City(event)" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" {{ empty(old('input_spa_city', $stressProneArea->city_id)) || old('input_spa_city', $stressProneArea->city_id) == 'default' ? 'disabled' : '' }}>
-													<option id="option_page1_city_default" value="default" {{ old('input_spa_city', $stressProneArea->city_id) == 'default' ? 'selected' : '' }} required>-- Select City --</option>
-													@if (isset($provinces) && !empty($provinces))
-														@foreach ($provinces as $province)
-															@if (isset($province->cities) && !empty($province->cities))
-																<optgroup id="province-{{ $province->id }}" label="{{$province->province }}" {{ old('input_spa_province', $stressProneArea->province_id) == $province->id ? '' : 'hidden'}}>
-																	@foreach ($province->cities()->get() as $city)
-																		<option value="{{$city->id}}" {{ old('input_spa_city', $stressProneArea->city_id) == $city->id ? 'selected' : '' }}>{{ utf8_decode($city->city) }}</option>
-																	@endforeach
-																</optgroup> 
-															@endif 
-														@endforeach
-													@endif
-												</select>
+
+										<div class="col-span-6 sm:col-span-3">
+											<div class="relative z-0 w-full mb-6 group">
+												<input name="input_spa_city" id="input_spa_city" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="{{ $stressProneArea->city ?? " - " }}" disabled/>
+												<label for="label_spa_city" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">City</label>
+											</div>
+										</div>
+
+										<div class="col-span-6 sm:col-span-3">
+											<div class="relative z-0 w-full mb-6 group">
+												<input name="input_spa_municipality" id="input_spa_municipality" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="{{ $stressProneArea->municipality ?? " - "  }}" disabled/>
+												<label for="label_spa_municipality" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Municipality</label>
 											</div>
 										</div>
 
 										<div class="col-span-6 sm:col-span-4">
-											<label class="block text-sm font-medium text-gray-700">
-												Municipality
-											</label>
-											<div class="relative mt-2">
-												<select id="input_spa_municipality" name="input_spa_municipality" onchange="selectPage1Municipality(event)" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" {{ empty(old('input_spa_municipality', $stressProneArea->municipality_id)) || old('input_spa_municipality', $stressProneArea->municipality_id) == 'default' ? 'disabled' : '' }} required>
-													<option id="option_page1_municipality_default" value="default" {{ old('input_spa_municipality', $stressProneArea->municipality_id) == 'default' ? 'selected' : '' }}>-- Select Municipality --</option>
-													@if (isset($provinces) && !empty($provinces))
-														@foreach ($provinces as $province)
-															@if (isset($province->municipalities) && !empty($province->municipalities))
-																<optgroup id="province-{{$province->id}}" label="{{$province->province}}" {{ old('input_spa_province', $stressProneArea->province_id) == $province->id ? '' : 'hidden'}}>
-																	@foreach ($province->municipalities()->get() as $municipality)
-																		<option value="{{$municipality->id}}" {{ old('input_spa_municipality', $stressProneArea->municipality_id) == $municipality->id ? 'selected' : '' }}>{{ utf8_decode($municipality->municipality) }}</option>
-																	@endforeach
-																</optgroup> 
-															@endif 
-														@endforeach
-													@endif
-												</select>
-											</div>
-										</div>
-										<div class="col-span-6 sm:col-span-4">
-											<label class="block text-sm font-medium text-gray-700">
-												Barangay
-											</label>
-
-											<div class="relative mt-2">
-												<select id="input_spa_barangay" name="input_spa_barangay" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" {{ empty(old('input_spa_barangay', $stressProneArea->barangay_id)) || old('input_spa_barangay', $stressProneArea->barangay_id) == 'default' ? 'disabled' : old('input_spa_barangay', $stressProneArea->barangay_id) }} required>
-												<option id="option_page1_barangay_default" value="default" {{ old('input_spa_barangay', $stressProneArea->barangay_id) == 'default' ? 'selected' : '' }}>-- Select Barangay --</option>
-												
-												@if (isset($provinces) && !empty($provinces))
-													@foreach ($provinces as $province)
-														@if (isset($province->cities) && !empty($province->cities))
-															@foreach ($province->cities()->get() as $city)
-																@if (!empty($city->barangays()->where('entity_id', 2)))
-																	<optgroup id="city-{{ $city->id }}" label="{{$city->city}}" {{ old('input_spa_city', $stressProneArea->city_id) == $city->id ? '' : 'hidden' }}>
-																		@foreach ($city->barangays()->where('entity_id', 2)->get() as $barangay)
-																			<option value="{{$barangay->id}}" {{ old('input_spa_barangay', $stressProneArea->barangay_id) == $barangay->id ? 'selected' : ''}}>{{ utf8_decode($barangay->barangay) }}</option>
-																		@endforeach
-																	</optgroup>
-																@endif
-															@endforeach
-														@endif
-													@endforeach
-												@endif
-
-												@if (isset($provinces) && !empty($provinces))
-													@foreach ($provinces as $province)
-														@if (isset($province->municipalities) && !empty($province->municipalities))
-															@foreach ($province->municipalities()->get() as $municipality)
-															@if (!empty($municipality->barangays()->where('entity_id', 3)))
-																<optgroup id="municipality-{{ $municipality->id }}" label=" {{$municipality->municipality}}" {{ old('input_spa_municipality', $stressProneArea->municipality_id) == $municipality->id ? '' : 'hidden' }}>
-																	@foreach ($municipality->barangays()->where('entity_id', 3)->get() as $barangay)
-																		<option value="{{$barangay->id}}" {{ old('input_spa_barangay', $stressProneArea->barangay_id) == $barangay->id ? 'selected' : ''}}>{{ utf8_decode($barangay->barangay) }}</option>
-																	@endforeach
-																</optgroup>
-															@endif
-															@endforeach
-														@endif
-													@endforeach
-												@endif
-												</select>
+											<div class="relative z-0 w-full mb-6 group">
+												<input name="input_spa_barangay" id="input_spa_barangay" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="{{ $stressProneArea->barangay ?? " - " }}" disabled/>
+												<label for="label_spa_barangay" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Barangay</label>
 											</div>
 										</div>
 

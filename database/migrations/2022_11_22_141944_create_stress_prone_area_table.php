@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger("barangay_id")->nullable();
 
             $table->json("stressEcosystem")->nullable();
-            $table->integer("totalFarmers")->nullable();
-            $table->integer("totalStressArea")->nullable();
+            $table->double("totalFarmers")->nullable();
+            $table->double("totalStressArea")->nullable();
 
             $table->dateTime("initdt")->nullable();
             $table->dateTime("upddt")->nullable();

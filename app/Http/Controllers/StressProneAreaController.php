@@ -107,14 +107,21 @@ class StressProneAreaController extends Controller
      */
     public function edit(StressProneArea $stressProneArea)
     {
-        $provinces = Province::orderBy('code')->get();
-        $cities = City::orderBy('code')->get();
-        $municipalities = Municipality::orderBy('code')->get();
-        $barangays = Barangay::orderBy('code')->get();
+        $stressProneArea = StressProneArea::where('stresspronearea.id', $stressProneArea->id)
+                                ->leftjoin('provinces', 'stresspronearea.province_id', '=', 'provinces.id')
+                                ->leftjoin('cities', 'stresspronearea.city_id', '=', 'cities.id')
+                                ->leftjoin('municipalities', 'stresspronearea.municipality_id', '=', 'municipalities.id')
+                                ->leftjoin('barangay', 'stresspronearea.barangay_id', '=', 'barangay.id')
+                                ->select(
+                                    'stresspronearea.*',
+                                    'provinces.province as province',
+                                    'municipalities.municipality as municipality',
+                                    'cities.city as city',
+                                    'barangay.barangay as barangay',
+                                )
+                                ->first();
 
-        $stressProneArea = StressProneArea::where('id', $stressProneArea->id)->first();
-        
-        return view('stresspronearea.edit', compact('stressProneArea', 'provinces', 'cities', 'municipalities', 'barangays'));
+        return view('stresspronearea.edit', compact('stressProneArea'));
     }
 
     /**
@@ -126,13 +133,7 @@ class StressProneAreaController extends Controller
      */
     public function update(UpdateStressProneAreaRequest $request, StressProneArea $stressProneArea)
     {
-
         $stressProneArea->update([
-            'province_id' => $request->validated()['input_spa_province'],
-            'city_id' => empty($request->validated()['input_spa_city']) ? NULL : $request->validated()['input_spa_city'],
-            'municipality_id' => empty($request->validated()['input_spa_municipality']) ? NULL : $request->validated()['input_spa_municipality'],
-            'barangay_id' => empty($request->validated()['input_spa_barangay']) ? NULL : $request->validated()['input_spa_barangay'], 
-
             'totalFarmers' => $request->validated()['input_spa_totalfarmers'],
             'totalStressArea' => $request->validated()['input_spa_totalstressarea'],
             'stressEcosystem' => empty($request->validated()['input_spa_stressecosystem']) ? NULL : $request->validated()['input_spa_stressecosystem'],
