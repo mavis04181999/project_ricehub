@@ -160,6 +160,18 @@ class StressProneAreaController extends Controller
 
     }
 
+    public function delete(int $stressProneArea)
+    {
+        $stressProneArea = StressProneArea::withTrashed()->find($stressProneArea);
+
+        if ($stressProneArea && $stressProneArea->trashed())
+        {
+            $stressProneArea->forceDelete();
+        }
+
+        return back();
+    }
+
     public function restore(int $stressProneArea)
     {
         $stressProneArea = StressProneArea::withTrashed()->find($stressProneArea);
@@ -231,9 +243,7 @@ class StressProneAreaController extends Controller
                                     )
                                     ->get();
 
-        // dd($citiesSPADetails, $municipalitiesSPADetails);
-
-        return view('stresspronearea.province', compact('citiesSPADetails', 'municipalitiesSPADetails'));
+        return view('stresspronearea.province', compact('citiesSPADetails', 'municipalitiesSPADetails', 'province'));
     }
 
     public function archive()

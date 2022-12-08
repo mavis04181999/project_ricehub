@@ -344,13 +344,41 @@ class FarmerController extends Controller
     public function destroy(Farmer $farmer)
     {
 
-        // dd($farmer->farms()->withTrashed()->get());
-
         $farmer->delete();
 
         return redirect()->route('enumerator.dashboard')
             ->with('message', 'Farmer Deleted Successfully. <a class="btn btn-sm btn-warning" href="'.route('farmer.restore',  ['farmer_id' => $farmer->id]).'">Whoops, Undo</a>');
 
+    }
+
+    public function delete(int $farmer_id)
+    {
+
+        $farmer = Farmer::withTrashed()->find($farmer_id);
+
+        if ($farmer && $farmer->trashed())
+        {
+            $farms = $farmer->farms()->withTrashed()->get();
+
+            if ($farms->count() > 0) 
+            {
+                foreach ($farms as $key => $farm) 
+                {
+                    $farm_extended = $farm->farm_extended()->withTrashed()->first();
+
+                    if ($farm_extended && $farm_extended->trashed()) 
+                    {
+                        $farm_extended->forceDelete();
+                    }
+
+                    $farm->forceDelete();
+                }
+            }
+
+            $farmer->forceDelete();
+        }
+
+        return back();
     }
 
     public function restore(int $farmer_id)
@@ -379,41 +407,6 @@ class FarmerController extends Controller
             $farmer->restore();
         }
 
-        // if ($farmer && $farmer->trashed()) 
-        // {
-        //     $farms = Farm::withTrashed()->where('farmer_id', $farmer->id)->get();
-
-        //     if ($farms->count() > 0) {
-                
-        //         foreach ($farms as $key => $farm) 
-        //         {
-        //             if($farm->trashed())
-        //             {
-        //                 $farm_ext = Farm_Extended::withTrashed()->where('farm_id', $farm->id)->first();
-                        
-        //                 if ($farm_ext && $farm_ext->trashed()) 
-        //                 {
-        //                     $farm_ext->restore();
-        //                 }
-        //             }
-
-        //             $farm->restore();
-        //         }
-        //     }
-
-        //     $farmer->restore();
-        // }
-        
-        
-        
-        // // $farmer = Farmer::withTrashed()->find($farmer_id);
-
-        // // if ($farmer && $farmer->trashed()) {
-        // //     $farm = Farm::withTrash()->where('farmer_id', $farmer->id);
-        // //     $farmer->restore();
-
-        // // }
-
         return redirect()->route('enumerator.dashboard')->with('success', 'Farmer restored successfully');
     }
 
@@ -432,7 +425,6 @@ class FarmerController extends Controller
                         ->leftjoin('barangay', 'farmers.barangay_id', '=', 'barangay.id')
                         ->leftjoin('picklistitem as civilstatus', 'farmers.civilStatus_id', '=', 'civilstatus.id')
                         ->leftjoin('picklistitem as education', 'farmers.education_id', '=', 'education.id')
-                    // ->where('farmers.id', '=', 1)
                     ->select(
                         'farmers.*',
                         'provinces.province',

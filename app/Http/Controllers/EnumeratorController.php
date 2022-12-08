@@ -12,6 +12,7 @@ use App\Models\Province;
 use App\Models\StressProneArea;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EnumeratorController extends Controller
@@ -95,8 +96,8 @@ class EnumeratorController extends Controller
         $totalFarmers = Farmer::where('deleted_at', null)->count();
 
         $totalRiceArea = Farm::where('deleted_at', null)->sum('totalRiceArea');
+        
         $totalRiceArea = number_format(round($totalRiceArea, 2), 2, '.', ',');
-
         $totalStressArea = Farm::where('deleted_at', null)->sum('totalStressArea');
         $totalStressArea = number_format(round($totalStressArea, 2), 2, '.', ',');
 
@@ -110,7 +111,8 @@ class EnumeratorController extends Controller
                         ->leftjoin('barangay', 'farmers.barangay_id', '=', 'barangay.id')
                         ->leftjoin('picklistitem as civilstatus', 'farmers.civilStatus_id', '=', 'civilstatus.id')
                         ->leftjoin('picklistitem as education', 'farmers.education_id', '=', 'education.id')
-                    // ->where('farmers.id', '=', 1)
+                        ->where('farmers.initid', '=', Auth::user()->id)
+                        ->orwhere('farmers.updid', '=', Auth::user()->id)
                     ->select(
                         'farmers.*',
                         'provinces.province',

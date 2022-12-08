@@ -8,8 +8,8 @@
             <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
             <div class="px-4 sm:px-0">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">City Stress Data</h3>
-                <p class="mt-1 text-sm text-gray-600">Something here.</p>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Province: {{ utf8_decode($province->province) }}</h3>
+                <p class="mt-1 text-sm text-gray-600">Cities Stress Data</p>
             </div>
 
             <hr class="mb-4">
@@ -94,8 +94,8 @@
             </div>
 
             <div class="px-4 sm:px-0">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Municipality Stress Data</h3>
-                <p class="mt-1 text-sm text-gray-600">Something here.</p>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Province: {{ utf8_decode($province->province) }}</h3>
+                <p class="mt-1 text-sm text-gray-600">Municipalities Stress Data</p>
             </div>
 
             <hr class="mb-4">

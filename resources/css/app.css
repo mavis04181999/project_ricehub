@@ -2,10 +2,24 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+#dashboardbackground {
+    background-image: url('../../public/images/dashboardbackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: 90% 20%; */
+}
+
 #loginbackground {
     background-image: url('../../public/images/loginbackground.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#welcomebackground {
+    background-image: url('../../public/images/masagana ani.png');
+    background-repeat: no-repeat;
+    background-size: 250px;
+    background-position: 80% -1%;
 }
 
 #something {

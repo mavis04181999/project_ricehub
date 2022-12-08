@@ -50,6 +50,7 @@
                                             <!-- Using utilities: -->
                                             <div class="flex">
                                                 <a href="{{ route('farmer.restore', $farmer->id) }}" class="btn btn-sm btn-warning mr-2">Restore</a>
+                                                <a href="{{ route('farmer.delete', $farmer->id) }}" class="btn btn-sm btn-danger mr-2">Delete</a>
                                             </div>
                                         </td>
                                     </tr>   

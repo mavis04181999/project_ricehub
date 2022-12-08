@@ -66,6 +66,7 @@
                                             <!-- Using utilities: -->
                                             <div class="flex">
                                                 <a href="{{ route('stresspronearea.restore', $stresspronearea->id) }}" class="btn btn-sm btn-warning mr-2">Restore</a>
+                                                <a href="{{ route('stresspronearea.delete', $stresspronearea->id) }}" class="btn btn-sm btn-danger mr-2">Delete</a>
                                             </div>
                                         </td>
                                     </tr>   
