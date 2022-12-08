@@ -11,6 +11,14 @@
             <p class="max-w-sm text-center text-darkGrayishBlue md:text-justify">
               Enhancing Resiliency and Food Security in Adverse Rice Areas in Bicol Region (Component 1) is a 2022 R&D Collaborative Project under Rice Program. This study aims to enhance the resiliency and productivity of rice farmers in stress prone ecosystem in Bicol region specifically to Generate maps of flood, saline intrusion and drought prone areas and Develop and establish Bicol rice stress prone area information hub.
             </p>
+
+			<div class="flex justify-center md:justify-start">
+				<a
+				href="{{route('enumerator.form')}}"
+				class="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+				>Go to Forms</a
+				>
+			</div>
         </div>
         <!-- Image -->
         <div class="md:w-1/2">
@@ -33,14 +41,6 @@
         <p class="max-w-sm text-center text-darkGrayishBlue md:text-justify">
           The project will also serve as reference for policy makers and other stakeholders for effective planning on how to respond on time and to effectively formulate programs and projects addressing resiliency and food security.
         </p>
-
-        <div class="flex justify-center md:justify-start">
-          <a
-          href="{{route('enumerator.form')}}"
-          class="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
-          >Go to Forms</a
-          >
-        </div>
       </div>
 
       <!-- Numbered List -->
