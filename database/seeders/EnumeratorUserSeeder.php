@@ -26,5 +26,16 @@ class EnumeratorUserSeeder extends Seeder
             'middleName' => "Rian",
             'initdt' => now()
         ]);
+
+        DB::table('users')->insert([
+            'email' => "ssabactol18@gmail.com",
+            'username' => "ssabactol18",
+            'password' => Hash::make("janedoe123"),
+            'role' => "enumerator",
+            'firstName' => "Santy Sean",
+            'lastName' => "Aguilar",
+            'middleName' => "Bactol",
+            'initdt' => now()
+        ]);
     }
 }
