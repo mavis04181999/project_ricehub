@@ -18,23 +18,12 @@ class EnumeratorUserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'email' => "enumerator@riceproject.com",
-            'username' => "rianLuzgel2",
+            'username' => "rianluzgel",
             'password' => Hash::make("janedoe123"),
             'role' => "enumerator",
             'firstName' => "Luzgel",
             'lastName' => "Adriano",
             'middleName' => "Rian",
-            'initdt' => now()
-        ]);
-
-        DB::table('users')->insert([
-            'email' => "ssabactol18@gmail.com",
-            'username' => "ssabactol18",
-            'password' => Hash::make("janedoe123"),
-            'role' => "enumerator",
-            'firstName' => "Santy Sean",
-            'lastName' => "Aguilar",
-            'middleName' => "Bactol",
             'initdt' => now()
         ]);
     }

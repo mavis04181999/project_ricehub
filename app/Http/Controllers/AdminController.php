@@ -25,7 +25,7 @@ class AdminController extends Controller
         
         $adminsCount = User::Admins()->count();
 
-        $users = User::whereNotIn('id', [Auth::user()->id])->get();
+        $users = User::whereNotIn('id', [Auth::user()->id])->where('deleted_at', null)->get();
 
         return view('admin.dashboard', compact('enumeratorsCount', 'adminsCount', 'users'));
     }
