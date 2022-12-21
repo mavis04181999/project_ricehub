@@ -351,6 +351,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('dashboard')->with('message', 'User Deleted Successfully. <a class="btn btn-sm btn-warning" href="'.route('user.restore',  ['user_id' => $user->id]).'">Whoops, Undo</a>');
+    }
+
+    public function restore(int $user_id)
+    {
+        $user = User::withTrashed()->find($user_id);
+
+        if ($user && $user->trashed())
+        {
+            $user->restore();
+        }
+
+        return redirect()->route('dashboard')->with('success', 'User restored successfully');
     }
 }

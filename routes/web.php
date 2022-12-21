@@ -66,7 +66,7 @@ Route::controller(UserController::class)->group(function()
     Route::patch('/user/{user}/login/update', 'update_login')->name('user-login.update');
 
     Route::delete('/user/destroy/{user}', 'destroy')->name('user.destroy');
-
+    Route::get('/user/{user_id}/restore', 'restore')->name('user.restore');
 });
 
 
