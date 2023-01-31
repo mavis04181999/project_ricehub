@@ -50,7 +50,7 @@ class StressProneAreaController extends Controller
             $stressProneArea = StressProneArea::where('city_id', $request->validated()['input_spa_city'])->where('barangay_id', $request->validated()['input_spa_barangay'])->where('deleted_at', null)->first();
         } else 
         {
-            $stressProneArea = StressProneArea::where('municipality_id', $request->validated()['input_spa_municipality'])->where('barangay_id', $request->validated()['input_spa_barangay'])->get();
+            $stressProneArea = StressProneArea::where('municipality_id', $request->validated()['input_spa_municipality'])->where('barangay_id', $request->validated()['input_spa_barangay'])->where('deleted_at', null)->first();
         }
 
         if (!empty($stressProneArea)) 
@@ -63,13 +63,13 @@ class StressProneAreaController extends Controller
             DB::beginTransaction();
 
                 $stressProneArea = StressProneArea::create([
-                    'province_id' => isset($request->validated()['input_spa_province']) ? $request->validated()['input_spa_province'] : null,
-                    'city_id' => isset($request->validated()['input_spa_city']) ? $request->validated()['input_spa_city'] : null,
-                    'municipality_id' => isset($request->validated()['input_spa_municipality']) ? $request->validated()['input_spa_municipality'] : null,
-                    'barangay_id' => isset($request->validated()['input_spa_barangay']) ? $request->validated()['input_spa_barangay'] : null,
+                    'province_id' => $request->validated()['input_spa_province'] ?? null,
+                    'city_id' => $request->validated()['input_spa_city'] ?? null,
+                    'municipality_id' => $request->validated()['input_spa_municipality'] ?? null,
+                    'barangay_id' => $request->validated()['input_spa_barangay'] ?? null,
                     'stressEcosystem' => $request->validated()['input_spa_stressecosystem'],
-                    'totalFarmers' => isset($request->validated()['input_spa_totalfarmers']) ? $request->validated()['input_spa_totalfarmers'] : null,
-                    'totalStressArea' => isset($request->validated()['input_spa_totalstressarea']) ? $request->validated()['input_spa_totalstressarea'] : null,
+                    'totalFarmers' => $request->validated()['input_spa_totalfarmers'] ?? null,
+                    'totalStressArea' => $request->validated()['input_spa_totalstressarea'] ?? null,
 
                     'initdt' => Carbon::now(),
                     'upddt' => Carbon::now(),
