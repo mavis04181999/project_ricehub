@@ -51,8 +51,8 @@ class StressProneAreaRequest extends FormRequest
 
             'input_spa_stressecosystem.required' => 'Stress Ecosystem field is required.',
 
-            'input_spa_totalfarmers.min' => 'A.Farmer\'s Profile: Age field must be at least 1',
-            'input_spa_totalstressarea.min' => 'A.Farmer\'s Profile: Age field must be at least 1',
+            'input_spa_totalfarmers.min' => 'A.Farmer\'s Profile: Total Farmers field must be at least 1',
+            'input_spa_totalstressarea.min' => 'A.Farmer\'s Profile: Total Stress Area field must be at least 1',
         ];
     }
 }
